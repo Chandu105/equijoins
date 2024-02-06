@@ -94,9 +94,11 @@ def emp_mgr_dept(request):
 def emp_salgrade(request):
     #EO=Emp.objects.all()
     #SO=SalGrade.objects.all()
-    SO=SalGrade.objects.filter(grade__in=(3,4))
+    SO=SalGrade.objects.filter(grade__in=(3,4,5))
     EO=Emp.objects.none()
     for sgo in SO:
         EO=EO|Emp.objects.filter(sal__range=(sgo.losal,sgo.hisal))
+       
+
     d={'EO':EO,'SO':SO}
     return render(request,'emp_salgrade.html',d)
